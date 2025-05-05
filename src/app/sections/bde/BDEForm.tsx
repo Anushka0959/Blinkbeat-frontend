@@ -1,5 +1,7 @@
 'use client';
 
+import Footer from '@/app/components/Layouts/Footer';
+import Navbar from '@/app/components/Layouts/Navbar';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -152,6 +154,8 @@ export default function BDEForm() {
   };
 
   return (
+    <>
+    <Navbar/>
     <section className="min-h-screen bg-gradient-to-br from-black via-[#111827] to-[#1f2937] text-white py-20 px-6">
       <div className="max-w-xl mx-auto bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-xl">
         <h2 className="text-3xl font-bold text-center mb-6">BDE Registration</h2>
@@ -265,5 +269,7 @@ export default function BDEForm() {
         </form>
       </div>
     </section>
+    <Footer/>
+    </>
   );
 }

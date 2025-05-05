@@ -31,8 +31,8 @@ const Navbar = () => {
   <Link href="#services" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
     <HighlighterIcon size={18} /> Spotlight
   </Link>
-  <Link href="#clients" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
-    <Mail size={18} /> Email
+  <Link href="/emall" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
+    <Mail size={18} /> E-Mall
   </Link>
   <Link href="#about" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
     <MonitorSmartphone size={18} /> Studio
@@ -40,7 +40,7 @@ const Navbar = () => {
   <Link href="#contact" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
     <Building2 size={18} /> Company
   </Link>
-  <Link href="#contact" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
+  <Link href="/joinus" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
     <UserPlus size={18} /> Join Us
   </Link>
   <Link href="#contact" className="flex items-center gap-1 hover:text-[#23DDC4] transition">
@@ -75,8 +75,8 @@ const Navbar = () => {
           <Link href="#services" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-[#23DDC4] transition">
             < HighlighterIcon size={18} /> Spotlight
           </Link>
-          <Link href="#clients" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-[#23DDC4] transition">
-            <Mail size={18} /> Email
+          <Link href="/emall" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-[#23DDC4] transition">
+            <Mail size={18} /> E-Mall
           </Link>
           <Link href="#about" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-[#23DDC4] transition">
             <MonitorSmartphone size={18} /> Studio
@@ -84,7 +84,7 @@ const Navbar = () => {
           <Link href="#contact" onClick={() => setIsOpen(false)} className="flex items-center gap-2 hover:text-[#23DDC4] transition">
             <Building2 size={18} /> Company
           </Link>
-          <Link href="#contact" className="flex items-center gap-2 hover:text-[#23DDC4] transition">
+          <Link href="/joinus" className="flex items-center gap-2 hover:text-[#23DDC4] transition">
             <UserPlus size={18} /> Join Us
           </Link>
           <Link href="#contact" className="flex items-center gap-2 hover:text-[#23DDC4] transition">
