@@ -4,22 +4,46 @@ import { toast } from 'sonner';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000';
 
-export default function KYCModal({ bde, onClose, refresh }: any) {
+export default function KYCModal({ partner, onClose, refresh, role }: any) {
   const token = typeof window !== 'undefined' ? localStorage.getItem('superadminToken') : '';
 
   const updateKYC = async (status: 'approved' | 'rejected') => {
     try {
-      const res = await fetch(`${BASE_URL}/api/superadmin/bdes/${bde._id}/updateKYC`, {
-        method: 'PUT',
+      let url = '';
+      let body = {};
+      let method = 'PUT';
+
+      if (role === 'bdes') {
+        url = `${BASE_URL}/api/superadmin/bdes/${partner._id}/updateKYC`;
+        body = {
+          aadhaarNumber: partner.kyc?.aadhaarNumber || '',
+          panNumber: partner.kyc?.panNumber || '',
+          status,
+        };
+      } else if (role === 'stores') {
+        url = `${BASE_URL}/api/superadmin/stores/${partner._id}/kyc/${status}`;
+        if (status === 'rejected') {
+          body = { rejectionReason: 'Rejected by admin' };
+        }
+      } else if (role === 'studios') {
+        url = `${BASE_URL}/api/superadmin/studios/${partner._id}/kyc/${status}`;
+        if (status === 'rejected') {
+          body = { rejectionReason: 'Rejected by admin' };
+        }
+      } else if (role === 'delivery-partners') {
+        url = `${BASE_URL}/api/superadmin/delivery-partners/${partner._id}/kyc/${status}`;
+        if (status === 'rejected') {
+          body = { rejectionReason: 'Rejected by admin' };
+        }
+      }
+
+      const res = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          aadhaarNumber: bde.kyc?.aadhaarNumber,
-          panNumber: bde.kyc?.panNumber,
-          status,
-        }),
+        body: Object.keys(body).length ? JSON.stringify(body) : undefined,
       });
 
       const data = await res.json();
@@ -38,7 +62,6 @@ export default function KYCModal({ bde, onClose, refresh }: any) {
   const renderPreview = (label: string, path: string) => {
     if (!path) return null;
 
-    // Remove double slashes
     const cleanedPath = path.startsWith('/') ? path.slice(1) : path;
     const fullPath = `${BASE_URL}/${cleanedPath}`;
     const isImage = /\.(jpg|jpeg|png|gif)$/i.test(path);
@@ -88,13 +111,13 @@ export default function KYCModal({ bde, onClose, refresh }: any) {
         <h2 className="text-xl font-semibold mb-4">Review KYC</h2>
 
         <div className="space-y-3 text-sm">
-          <p><strong>Aadhaar:</strong> {bde.kyc?.aadhaarNumber}</p>
-          <p><strong>PAN:</strong> {bde.kyc?.panNumber}</p>
-          <p><strong>Status:</strong> <span className="capitalize">{bde.kyc?.status}</span></p>
+          <p><strong>Aadhaar:</strong> {partner.kyc?.aadhaarNumber || 'Not provided'}</p>
+          <p><strong>PAN:</strong> {partner.kyc?.panNumber || 'Not provided'}</p>
+          <p><strong>Status:</strong> <span className="capitalize">{partner.kyc?.status}</span></p>
 
-          {renderPreview('Aadhaar File', bde.kyc?.aadhaarFile)}
-          {renderPreview('PAN File', bde.kyc?.panFile)}
-          {renderPreview('Photo', bde.kyc?.photo)}
+          {renderPreview('Aadhaar File', partner.kyc?.aadhaarFile)}
+          {renderPreview('PAN File', partner.kyc?.panFile)}
+          {renderPreview('Photo', partner.kyc?.photo)}
         </div>
 
         <div className="flex justify-between mt-6">

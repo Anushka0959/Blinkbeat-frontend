@@ -1,16 +1,24 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Bell, LogOut } from 'lucide-react';
-const handleLogout = () => {
-  localStorage.removeItem('superadminToken');
-  window.location.href = '/superadmin/login';
-};
-
-<button onClick={handleLogout} className="...">
-  <LogOut className="w-4 h-4" /> Logout
-</button>
 
 export default function TopNav() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('superadminToken');
+      window.location.href = '/superadmin/login';
+    }
+  };
+
+  if (!mounted) return null; // Prevent hydration mismatch
+
   return (
     <header className="flex justify-between items-center py-4 px-6 bg-[#111827] border-b border-gray-700">
       <h1 className="text-xl font-bold text-white">BlinkBeat SuperAdmin</h1>
@@ -27,7 +35,10 @@ export default function TopNav() {
             alt="Admin"
             className="w-8 h-8 rounded-full border border-gray-400"
           />
-          <button className="text-sm text-gray-300 hover:text-red-400 flex items-center gap-1">
+          <button
+            onClick={handleLogout}
+            className="text-sm text-gray-300 hover:text-red-400 flex items-center gap-1"
+          >
             <LogOut className="w-4 h-4" />
             Logout
           </button>

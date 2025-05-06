@@ -12,6 +12,7 @@ import {
   LogOut,
   UserCog,
   Truck,
+  Camera,
 } from 'lucide-react';
 
 const navItems = [
@@ -25,8 +26,10 @@ const navItems = [
 ];
 
 const bdeItems = [
-  { name: 'BDE', icon: UserCog, href: '/superadmin/bdes' },
-  { name: 'Add BDE', icon: UserCog, href: '/superadmin/bde/add' },
+  { name: 'BDA Management', icon: UserCog, href: '/superadmin/bdes' },
+  { name: 'Store Management', icon: Store, href: '/superadmin/stores' },
+  { name: 'Studio Management', icon: Camera, href: '/superadmin/studios' },
+  { name: 'Delhivey Management', icon: Truck, href: '/superadmin/delhivery' },
 ];
 
 const delhiveryItems = [
@@ -67,20 +70,11 @@ export default function Sidebar() {
       </div>
       <nav className="p-4 space-y-2">
         {renderSection('Main', navItems)}
-        {renderSection('BDE Management', bdeItems)}
-        {renderSection('Delhivery Management', delhiveryItems)}
+        {renderSection('Partner Management', bdeItems)}
+        {/* {renderSection('Delhivery Management', delhiveryItems)} */}
       </nav>
       <div className="absolute bottom-4 w-full px-4">
-        <button
-          onClick={() => {
-            localStorage.removeItem('superadminToken');
-            window.location.href = '/superadmin/login';
-          }}
-          className="flex items-center gap-2 text-red-400 hover:text-red-300 px-4 py-2 w-full rounded-md"
-        >
-          <LogOut className="w-5 h-5" />
-          Logout
-        </button>
+       
       </div>
     </aside>
   );

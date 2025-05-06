@@ -6,6 +6,61 @@ import Footer from '../components/Layouts/Footer';
 import { motion } from 'framer-motion';
 
 export default function JoinUsPage() {
+  const partnerCards = [
+    {
+      title: 'BDA Partner',
+      icon: 'fa-building',
+      bgColor: 'bg-purple-100',
+      textColor: 'text-purple-600',
+      btnColor: 'bg-purple-600 hover:bg-purple-700',
+      link: '/bde/register',
+      items: [
+        'Earn up to 25% commission',
+        'Exclusive training programs',
+        'Build your own team',
+      ],
+    },
+    {
+      title: 'Store Partner',
+      icon: 'fa-store',
+      bgColor: 'bg-purple-100',
+      textColor: 'text-purple-600',
+      btnColor: 'bg-purple-600 hover:bg-purple-700',
+      link: '/storepartner/register',
+      items: [
+        'Premium store location',
+        'Complete business setup',
+        'Marketing support',
+      ],
+    },
+    {
+      title: 'Studio Partner',
+      icon: 'fa-camera',
+      bgColor: 'bg-red-100',
+      textColor: 'text-red-600',
+      btnColor: 'bg-red-500 hover:bg-red-600',
+      link: '/studiospartner/register',
+      items: [
+        'Professional equipment',
+        'Expert training',
+        'Booking platform access',
+      ],
+    },
+    {
+      title: 'Delivery Partner',
+      icon: 'fa-truck',
+      bgColor: 'bg-green-100',
+      textColor: 'text-green-600',
+      btnColor: 'bg-green-600 hover:bg-green-700',
+      link: '/delhiverypartner/register',
+      items: [
+        'Flexible schedule',
+        'Weekly payments',
+        'Bonus incentives',
+      ],
+    },
+  ];
+
   return (
     <>
       <Navbar />
@@ -46,56 +101,13 @@ export default function JoinUsPage() {
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-12 text-gray-800">Choose Your Partnership Role</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: 'BDA Partner',
-                icon: 'fa-building',
-                color: 'purple',
-                items: [
-                  'Earn up to 25% commission',
-                  'Exclusive training programs',
-                  'Build your own team',
-                ],
-                link: '/bde/register',
-              },
-              {
-                title: 'Store Partner',
-                icon: 'fa-store',
-                color: 'purple',
-                items: [
-                  'Premium store location',
-                  'Complete business setup',
-                  'Marketing support',
-                ],
-                link: '/storepartner',
-              },
-              {
-                title: 'Studio Partner',
-                icon: 'fa-camera',
-                color: 'red',
-                items: [
-                  'Professional equipment',
-                  'Expert training',
-                  'Booking platform access',
-                ],
-              },
-              {
-                title: 'Delivery Partner',
-                icon: 'fa-truck',
-                color: 'green',
-                items: [
-                  'Flexible schedule',
-                  'Weekly payments',
-                  'Bonus incentives',
-                ],
-              },
-            ].map((role, idx) => (
+            {partnerCards.map((role, idx) => (
               <div
                 key={idx}
                 className="bg-white shadow-lg rounded-xl p-6 border hover:shadow-xl hover:-translate-y-1 transition duration-300 ease-in-out"
               >
                 <div
-                  className={`flex justify-center items-center w-14 h-14 mx-auto bg-${role.color}-100 text-${role.color}-600 rounded-full mb-4`}
+                  className={`flex justify-center items-center w-14 h-14 mx-auto ${role.bgColor} ${role.textColor} rounded-full mb-4`}
                 >
                   <i className={`fas ${role.icon} text-xl`} />
                 </div>
@@ -105,21 +117,13 @@ export default function JoinUsPage() {
                     <li key={i}>✅ {point}</li>
                   ))}
                 </ul>
-                {role.link ? (
-                  <Link href={role.link}>
-                    <button
-                      className={`w-full bg-${role.color}-600 hover:bg-${role.color}-700 text-white px-4 py-2 rounded-full font-semibold transition`}
-                    >
-                      Join as {role.title} →
-                    </button>
-                  </Link>
-                ) : (
+                <Link href={role.link}>
                   <button
-                    className={`w-full bg-${role.color}-600 hover:bg-${role.color}-700 text-white px-4 py-2 rounded-full font-semibold transition`}
+                    className={`w-full ${role.btnColor} text-white px-4 py-2 rounded-full font-semibold transition`}
                   >
                     Join as {role.title} →
                   </button>
-                )}
+                </Link>
               </div>
             ))}
           </div>
