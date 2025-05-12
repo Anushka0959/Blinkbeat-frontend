@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Megaphone, Globe, CalendarCheck, Star } from 'lucide-react';
-import Navbar from '../Layouts/Navbar';
-import CategorySection from '../category/CategorySection';
+import Navbar from '../../../components/Layouts/Navbar';
+import CategorySection from '../../../components/category/CategorySection';
 
 export default function Home() {
   const [quoteModal, setQuoteModal] = useState(false);
