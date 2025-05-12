@@ -12,9 +12,10 @@ export default function Home() {
   const [quoteModal, setQuoteModal] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', service: '', message: '' });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
