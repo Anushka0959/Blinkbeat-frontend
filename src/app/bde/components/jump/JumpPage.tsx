@@ -17,12 +17,13 @@ export default function Home() {
   };
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Quote Request Submitted:', form);
     setQuoteModal(false);
     setForm({ name: '', email: '', service: '', message: '' });
   };
+  
 
   return (
     <>

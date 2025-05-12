@@ -3,10 +3,26 @@
 import { useEffect, useState } from 'react';
 import DeliveryTable from '../components/DeliveryTable';
 
+// ✅ Define DeliveryPartner type
+interface DeliveryPartner {
+  _id: string;
+  name: string;
+  email: string;
+  mobile: string;
+  kyc?: {
+    status: 'pending' | 'approved' | 'rejected';
+    aadhaarNumber?: string;
+    panNumber?: string;
+    aadhaarFile?: string;
+    panFile?: string;
+    photo?: string;
+  };
+}
+
 export default function DelhiveryManagementPage() {
-  const [partners, setPartners] = useState([]);
+  const [partners, setPartners] = useState<DeliveryPartner[]>([]);
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
 
   const fetchPartners = async () => {
     try {
@@ -49,7 +65,7 @@ export default function DelhiveryManagementPage() {
 
       {/* Filter Buttons */}
       <div className="flex gap-3 mb-4">
-        {['all', 'pending', 'approved', 'rejected'].map(status => (
+        {(['all', 'pending', 'approved', 'rejected'] as const).map(status => (
           <button
             key={status}
             className={`px-4 py-1 rounded ${
@@ -59,7 +75,7 @@ export default function DelhiveryManagementPage() {
             }`}
             onClick={() => setStatusFilter(status)}
           >
-            {status.charAt(0).toUpperCase() + status.slice(1)} ({total[status as keyof typeof total]})
+            {status.charAt(0).toUpperCase() + status.slice(1)} ({total[status]})
           </button>
         ))}
       </div>

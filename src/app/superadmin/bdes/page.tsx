@@ -6,10 +6,20 @@ import axiosInstance from '@/app/lib/axiosInstance';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+interface BDE {
+  _id: string;
+  name: string;
+  email: string;
+  mobile: string;
+  kyc?: {
+    status: 'pending' | 'approved' | 'rejected';
+  };
+}
+
 export default function BDEManagementPage() {
-  const [bdes, setBDEs] = useState([]);
+  const [bdes, setBDEs] = useState<BDE[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState<any>(null);
+  const [selected, setSelected] = useState<BDE | null>(null);
   const [statusFilter, setStatusFilter] = useState('all');
 
   const fetchBDEs = async () => {
@@ -76,7 +86,7 @@ export default function BDEManagementPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredBDEs.map((bde: any) => (
+              {filteredBDEs.map((bde) => (
                 <tr key={bde._id} className="border-t border-gray-700">
                   <td className="p-2">{bde.name}</td>
                   <td className="p-2">{bde.email}</td>
