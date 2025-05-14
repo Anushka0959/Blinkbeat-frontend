@@ -50,7 +50,7 @@ export default function StoreRegisterPage() {
     if (kyc.photo) formData.append('kyc[photo]', kyc.photo);
 
     try {
-      await axios.post(`${BASE_URL}/api/stores/register`, formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/stores/register`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       alert('Store partner registered successfully');
